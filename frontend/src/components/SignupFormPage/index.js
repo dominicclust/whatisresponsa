@@ -23,7 +23,7 @@ export const SignUpFormPage = () => {
             email,
             password
         }
-        if (password == confirmPassword) {
+        if (password === confirmPassword) {
             return dispatch(sessionActions.signup(user))
                 .catch(async (res) => {
                     const data = await res.json();
