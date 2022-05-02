@@ -29,7 +29,7 @@ const ProfileButton = ({user}) => {
     return (
         <>
             <button onClick={openMenu}>
-                <i classname='fa-duotone fa-id-badge'/>
+                <i className='fa-duotone fa-id-badge'/>
             </button>
             {showMenu && (
                 <ul className='profile-dropdown'>
