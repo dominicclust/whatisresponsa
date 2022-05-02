@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from '../../store/session';
@@ -12,7 +12,7 @@ export const SignUpFormPage = () => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [valErrors, setValErrors] = useState([])
-    
+
     if (sessionUser) return (<Redirect to='/'/>)
     const handleSubmit = (e) => {
         e.preventDefault();
