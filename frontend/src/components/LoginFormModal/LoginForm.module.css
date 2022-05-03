@@ -1,0 +1,18 @@
+.form {
+    padding: 60px;
+    box-shadow: 0 0 4px 4px #AAA;
+
+}
+
+.label {
+    font-size: 1.1 rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.input {
+    border-radius: 5px
+}
+
+.button {
+    border-radius: 5px;
+}

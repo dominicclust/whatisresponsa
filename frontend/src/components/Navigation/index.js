@@ -15,18 +15,20 @@ function Navigation({ isLoaded }) {
         )
     } else sessionLinks = (
         <>
-            <LoginFormModal />
-            <NavLink className={styles.sessionLinks} to='/signup'>Sign Up</NavLink>
+            <span>
+                <LoginFormModal className={styles.sessionLinks}/>
+            </span>
+            <span>
+                <NavLink className={styles.sessionLinks} to='/signup'>Sign Up</NavLink>
+            </span>
         </>
     )
     return (
         <nav>
-            <ul>
-                <li>
-                    <NavLink className={styles.sessionLinks} exact to='/'>Home</NavLink>
-                    {isLoaded && sessionLinks}
-                </li>
-            </ul>
+            <span>
+                <NavLink className={styles.sessionLinks} exact to='/'>Home</NavLink>
+            </span>
+            {isLoaded && sessionLinks}
         </nav>
     )
 }

@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/dominicclust/whatisresponsa/issues"
   },
-  "homepage": "https://github.com/dominicclust/whatisresponsa#readme",
+  "homepage": "https://whatisresponsa.herokuapp.com",
   "dependencies": {
     "nodemon": "^2.0.16"
   }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import * as sessionActions from '../../store/session'
-
+import styles from './LoginForm.module.css'
 
 const LoginForm = () => {
     const dispatch = useDispatch();
@@ -21,16 +21,17 @@ const LoginForm = () => {
     }
     return (
         <div>
-            <form onSubmit={onSubmit}>
+            <form className={styles.form} onSubmit={onSubmit}>
                 <ul>
                     {valErrors.map((error, i) => (
                         <li key={i}>{error}</li>)
                     )}
                 </ul>
                 <div>
-                    <label>
+                    <label className={styles.label}>
                         Username or Email Address:
                         <input
+                        className={styles.input}
                         type='text'
                         name='credential'
                         value={credential}
@@ -40,9 +41,10 @@ const LoginForm = () => {
                     </label>
                 </div>
                 <div>
-                    <label>
+                    <label className={styles.label}>
                         Password:
                         <input
+                            className={styles.input}
                             type='password'
                             name='password'
                             value={password}
@@ -52,7 +54,7 @@ const LoginForm = () => {
                     </label>
                 </div>
                 <div>
-                    <button type='submit'>Log In</button>
+                    <button className={styles.button} type='submit'>Log In</button>
                 </div>
 
 

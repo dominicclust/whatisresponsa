@@ -3,3 +3,8 @@
     background-color: #FF1040;
     color: #FAFBFC;
 }
+.sessionLinks {
+    font-size: 1.1 rem;
+    padding: 5px 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
