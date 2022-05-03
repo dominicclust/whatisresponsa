@@ -4,6 +4,7 @@
     color: #FAFBFC;
 }
 .sessionLinks {
+    text-decoration: none;
     font-size: 1.1 rem;
     padding: 5px 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif
