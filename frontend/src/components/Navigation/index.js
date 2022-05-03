@@ -19,7 +19,7 @@ function Navigation({ isLoaded }) {
                 <LoginFormModal className={styles.sessionLinks}>Log In</LoginFormModal>
             </span>
             <span>
-                <SignupFormModal className={styles.sessionLinks}>Sign Up</NavLink>
+                <SignupFormModal className={styles.sessionLinks}>Sign Up</SignupFormModal>
             </span>
         </>
     )
