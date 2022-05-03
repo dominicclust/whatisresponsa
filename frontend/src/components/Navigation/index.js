@@ -16,10 +16,10 @@ function Navigation({ isLoaded }) {
     } else sessionLinks = (
         <>
             <span>
-                <LoginFormModal className={styles.sessionLinks}/>
+                <LoginFormModal className={styles.sessionLinks}>Log In</LoginFormModal>
             </span>
             <span>
-                <NavLink className={styles.sessionLinks} to='/signup'>Sign Up</NavLink>
+                <SignupFormModal className={styles.sessionLinks}>Sign Up</NavLink>
             </span>
         </>
     )

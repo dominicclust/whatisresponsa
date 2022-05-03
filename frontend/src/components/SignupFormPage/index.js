@@ -19,4 +19,4 @@ const SignupFormModal = () => {
     )
 }
 
-export default LoginFormModal;
+export default SignupFormModal;
