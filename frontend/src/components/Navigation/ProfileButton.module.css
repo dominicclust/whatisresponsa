@@ -1,3 +1,15 @@
-button {
-    background-color: lightgray;
+#i {
+    width: 2rem;
+    height: 2rem;
+}
+.button {
+    border: none;
+    background-color: #FA0020;
+    color: white;
+
+}
+.profileDropdown {
+    position:absolute;
+    right: 0;
+    top:0
 }

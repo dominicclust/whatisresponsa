@@ -55,7 +55,7 @@ export const SignupForm = () => {
                 <label className={styles.label}>
                     Email Address
                     <input className={styles.input}
-                        type='text'
+                        type='email'
                         name='email'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}

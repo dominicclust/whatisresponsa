@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import * as sessionActions from '../../store/session'
+import styles from './ProfileButton.module.css'
 
 const ProfileButton = ({user}) => {
     const dispatch = useDispatch();
@@ -28,8 +29,8 @@ const ProfileButton = ({user}) => {
 
     return (
         <>
-            <button onClick={openMenu}>
-                <i className='fa-duotone fa-id-badge'/>
+            <button className={styles.button} onClick={openMenu}>
+                <i id={styles.i} className="fa-solid fa-id-badge"></i>
             </button>
             {showMenu && (
                 <ul className='profile-dropdown'>

@@ -25,9 +25,9 @@ function Navigation({ isLoaded }) {
         </>
     )
     return (
-        <nav>
+        <nav className={styles.nav}>
             <span>
-                <NavLink className={styles.sessionLinks} exact to='/'>Home</NavLink>
+                <NavLink className={styles.link} exact to='/'>Home</NavLink>
             </span>
             {isLoaded && sessionLinks}
         </nav>
