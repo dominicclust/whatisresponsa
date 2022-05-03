@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from '../../store/session';
+import styles from './SignupForm.module.css'
 
-export const SignUpFormPage = () => {
+export const SignupForm = () => {
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
 
@@ -34,14 +35,14 @@ export const SignUpFormPage = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit}>
             <ul>
                 {valErrors.map((error, i) => <li key={i}>{error}</li>)}
             </ul>
             <div>
-                <label>
+                <label className={styles.label}>
                     Username
-                    <input
+                    <input className={styles.input}
                         type='text'
                         name='username'
                         value={username}
@@ -51,9 +52,9 @@ export const SignUpFormPage = () => {
                 </label>
             </div>
             <div>
-                <label>
+                <label className={styles.label}>
                     Email Address
-                    <input
+                    <input className={styles.input}
                         type='text'
                         name='email'
                         value={email}
@@ -63,9 +64,9 @@ export const SignUpFormPage = () => {
                 </label>
             </div>
             <div>
-                <label>
+                <label className={styles.label}>
                     Password
-                    <input
+                    <input className={styles.input}
                         type='password'
                         name='password'
                         value={password}
@@ -75,9 +76,9 @@ export const SignUpFormPage = () => {
                 </label>
             </div>
             <div>
-                <label>
+                <label className={styles.label}>
                     Confirm Password
-                    <input
+                    <input className={styles.input}
                         type='password'
                         name='confirmPassword'
                         value={confirmPassword}
@@ -87,7 +88,7 @@ export const SignUpFormPage = () => {
                 </label>
             </div>
             <div>
-                <button type='submit'>Sign Up</button>
+                <button className={styles.button} type='submit'>Sign Up</button>
             </div>
         </form>
 
