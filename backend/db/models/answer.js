@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     return {body, userId}
   }
   Answer.associate = function(models) {
-    Answer.belongsTo(models.User, {foreignKey: userId})
+    Answer.belongsTo(models.User, {foreignKey: 'userId'})
   };
   return Answer;
 };

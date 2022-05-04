@@ -25,3 +25,4 @@ const Answers = () => {
         </div>
     )
 }
+export default Answers

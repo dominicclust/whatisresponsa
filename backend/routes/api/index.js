@@ -1,10 +1,11 @@
 const router = require('express').Router();
 const sessionRouter = require('./session');
 const usersRouter = require('./users');
+const answersRouter = require('./answers')
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
-router.use('/answers', answersRouter)
+router.use('/answers', answersRouter);
 
 
 // Middleware Testing!
