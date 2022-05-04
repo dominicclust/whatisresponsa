@@ -20,7 +20,7 @@ const LoginForm = () => {
                 if (data && data.errors) setValErrors(data.errors)
         })
     }
-    const demoLogin = () => {
+    const demoLogin = (e) => {
         e.preventDefault();
         setCredential('iEmmaDemo')
         setPassword('password3')
