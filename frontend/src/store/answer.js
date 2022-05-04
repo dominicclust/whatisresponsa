@@ -17,43 +17,39 @@ const postAnswer = (answer) => {
     }
 }
 
-export const answerFetch = (answers) => async (dispatch) => {
-    const {clues} = answers
-    const response = await fetch('https://jarchive-json.glitch.me/05/07/2004/1', {
-        method: 'GET',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.Stringify({clues})
-    })
+export const answerFetch = () => async (dispatch) => {
+    const response = await csrfFetch('/api/answers')
     const data = await response.json()
-    dispatch(setAnswers(data))
-    return data
+    dispatch(getAnswers(data.answers))
+    return [...data.answers]
 }
 
 export const addAnswer = (answer) => async (dispatch) => {
-    const {body, userId} = answer;
+    const {body, userId, createdAt} = answer;
     const response = await csrfFetch('/api/answers', {
         method: 'POST',
         body: JSON.Stringify({
             body,
-            userId
+            userId,
+            createdAt
         })
     })
     const data = response.json()
     dispatch(postAnswer(answer))
 }
 
-const initialState = {answers: []}
+const initialState = {entries: []}
 
 const answersReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case GET_ANSWERS:
             newState = {...state}
-            newState.answers.push(action.payload.answers)
+            newState.entries = [...action.payload.answers]
             return newState;
         case POST_ANSWER:
             newState = {...state}
-            newState.answers = [action.payload, ...newState.answers]
+            newState.entries = [action.payload, ...newState.entries]
     }
 }
 export default answersReducer;

@@ -1,0 +1,11 @@
+.answerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+.answerDiv {
+    padding: 5px 5px;
+    margin: 1px 30px;
+    background-color: #0722AA;
+    color: #DEF;
+}

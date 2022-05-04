@@ -33,7 +33,7 @@ const ProfileButton = ({user}) => {
                 <i id={styles.i} className="fa-solid fa-id-badge"></i>
             </button>
             {showMenu && (
-                <ul className='profile-dropdown'>
+                <ul className='profileDropdown'>
                     <li>{user.username}</li>
                     <li>{user.email}</li>
                     <li>

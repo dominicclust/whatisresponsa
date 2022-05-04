@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import * as sessionActions from '../../store/session'
 import styles from './LoginForm.module.css'
+import {Link} from 'react-router-dom'
 
 const LoginForm = () => {
     const dispatch = useDispatch();
@@ -19,6 +20,14 @@ const LoginForm = () => {
                 if (data && data.errors) setValErrors(data.errors)
         })
     }
+    const demoLogin = () => {
+        e.preventDefault();
+        setCredential('iEmmaDemo')
+        setPassword('password3')
+
+        return dispatch(sessionActions.login({ credential, password }))
+    }
+
     return (
         <div>
             <form className={styles.form} onSubmit={onSubmit}>
@@ -55,9 +64,12 @@ const LoginForm = () => {
                 </div>
                 <div>
                     <button className={styles.button} type='submit'>Log In</button>
+                    <button className={styles.button} onClick={demoLogin}>Demo Login</button>
                 </div>
-
-
+                <div>
+                    <p>New to Responsa?</p>
+                    <Link to='/signup'>Sign up!</Link>
+                </div>
             </form>
         </div>
     )
