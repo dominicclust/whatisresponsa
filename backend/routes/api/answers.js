@@ -5,6 +5,9 @@ const { restoreUser } = require('../../utils/auth')
 
 const router = express.Router()
 
+
+// /backend/routes/api/answers.js
+
 router.get('/', restoreUser, asyncHandler(async(req, res) => {
     const answers = await Answer.findAll({include: User});
     return res.json({answers})

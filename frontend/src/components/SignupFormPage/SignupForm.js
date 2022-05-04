@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import styles from './SignupForm.module.css'
 
-export const SignupForm = () => {
+const SignupForm = () => {
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
 
@@ -94,3 +94,4 @@ export const SignupForm = () => {
 
     )
 }
+export default SignupForm

@@ -35,7 +35,7 @@ export const addAnswer = (answer) => async (dispatch) => {
         })
     })
     const data = response.json()
-    dispatch(postAnswer(answer))
+    dispatch(postAnswer(data.answer))
 }
 
 const initialState = {entries: []}
@@ -47,9 +47,13 @@ const answersReducer = (state = initialState, action) => {
             newState = {...state}
             newState.entries = [...action.payload.answers]
             return newState;
+
         case POST_ANSWER:
             newState = {...state}
-            newState.entries = [action.payload, ...newState.entries]
+            newState.entries = [action.payload, ...newState.entries];
+            return newState;
+
+        default: return state;
     }
 }
 export default answersReducer;

@@ -9,12 +9,14 @@ import { ModalProvider } from './context/Modal';
 import configureStore from './store'
 import { restoreCSRF, csrfFetch } from './store/csrf';
 import * as sessionActions from './store/session'
+import * as answerActions from './store/answers'
 
 const store = configureStore();
 
 if (process.env.NODE_ENV !== 'production') {
   restoreCSRF();
 
+  window.answerActions = answerActions
   window.csrfFetch = csrfFetch;
   window.store = store;
   window.sessionActions = sessionActions

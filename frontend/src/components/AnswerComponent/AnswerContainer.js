@@ -1,19 +1,18 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { answerFetch } from '../../store/answer';
+import { answerFetch } from '../../store/answers';
 import { SingleAnswer } from './SingleAnswer'
 import styles from './AnswerComponent.module.css'
 
-const Answers = () => {
+export const AnswerContainer = () => {
     const answers = useSelector(state => state.answers.entries)
     const dispatch = useDispatch()
 
-    useEffect(()=>{
-        dispatch(answerFetch())
+    useEffect(async ()=>{
+        await dispatch(answerFetch())
     }, [dispatch])
 
     return (
-
         <div className={styles.answerContainer}>
             {answers.map((answer) => {
                 return (
@@ -25,4 +24,3 @@ const Answers = () => {
         </div>
     )
 }
-export default Answers

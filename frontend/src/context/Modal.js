@@ -4,6 +4,8 @@ import styles from './Modal.module.css'
 
 const ModalContext = createContext();
 
+export const useModalContext = () => useContext(ModalContext)
+
 export const ModalProvider = ({children}) => {
     const modalRef = useRef();
     const [value, setValue] = useState();

@@ -1,6 +1,6 @@
 # What is Responsa?
 
-Users come in with a wide variety of answers and can get an even wider array of questions on Responsa. The app is inspired by the website **Quora** and the game show <<Jeopardy>>
+Users come in with a wide variety of answers and can get an even wider array of questions on Responsa. The app is inspired by the website **Quora** and the game show __Jeopardy__
 
 ## What is an answer?
 

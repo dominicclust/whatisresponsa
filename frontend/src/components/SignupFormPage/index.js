@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SignupForm } from "./SignupForm";
+import SignupForm from "./SignupForm";
 import { Modal } from '../../context/Modal';
 import { NavLink } from 'react-router-dom';
 import styles from '../Navigation/Navigation.module.css'
