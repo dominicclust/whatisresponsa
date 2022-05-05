@@ -1,16 +1,16 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import styles from './AnswerComponent.module.css'
 
 export const SingleAnswer = ({answer}) => {
-    const {id, body, createdAt} = answer
-    const username = answer.User.username
+    const {id, body, userId, createdAt} = answer
+
     return (
         <div className={styles.answerDiv}>
-            <Link to={`/answers/${id}`}>
+            <NavLink to={`/answers/${id}`}>
                 <h2>{body}</h2>
-            </Link>
-            <p>Posted by {username} on {createdAt}</p>
+            </NavLink>
+            <p>Posted by {userId} on {createdAt}</p>
         </div>
     )
 }

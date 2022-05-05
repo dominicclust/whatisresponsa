@@ -12,7 +12,7 @@ function Navigation({ isLoaded }) {
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
-        <ProfileButton user={sessionUser} />
+        <ProfileButton id={styles.i} user={sessionUser} />
         )
     } else sessionLinks = (
         <>
@@ -26,9 +26,10 @@ function Navigation({ isLoaded }) {
     )
     return (
         <nav className={styles.nav}>
-            <span>
-                <NavLink className={styles.link} exact to='/'>Home</NavLink>
-            </span>
+            <NavLink className={styles.link} exact to='/'>
+                <i id={styles.i} className='fa-solid fa-house'></i>
+            </NavLink>
+
             {isLoaded && sessionLinks}
         </nav>
     )

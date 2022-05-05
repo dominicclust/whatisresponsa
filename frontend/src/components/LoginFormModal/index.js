@@ -6,8 +6,8 @@ import styles from '../Navigation/Navigation.module.css'
 
 const LoginFormModal = () => {
     const [showModal, setShowModal] = useState(false)
-
     
+
     return (
         <>
             <NavLink onClick={()  => setShowModal(true)} className={styles.sessionLinks} to='/login'>Log In</NavLink>

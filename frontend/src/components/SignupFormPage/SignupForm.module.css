@@ -5,7 +5,7 @@
 }
 
 .label {
-    font-size: 1.1 rem;
+    font-size: 1.1rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -15,4 +15,9 @@
 
 .button {
     border-radius: 5px;
+}
+.link {
+    text-decoration: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.1rem;
 }

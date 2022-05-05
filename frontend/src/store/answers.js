@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 const GET_ANSWERS = 'answers/getAnswers';
 const POST_ANSWER = 'answers/postAnswer';
 
-const getAnswers = (answers) => {
+const getAnswers = answers => {
     return {
         type: GET_ANSWERS,
         payload: answers
@@ -19,9 +19,10 @@ const postAnswer = (answer) => {
 
 export const answerFetch = () => async (dispatch) => {
     const response = await csrfFetch('/api/answers')
-    const data = await response.json()
-    dispatch(getAnswers(data.answers))
-    return [...data.answers]
+    if (response.ok) {
+        const answers = await response.json();
+        dispatch(getAnswers(answers))
+    }
 }
 
 export const addAnswer = (answer) => async (dispatch) => {
@@ -45,7 +46,7 @@ const answersReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ANSWERS:
             newState = {...state}
-            newState.entries = [...action.payload.answers]
+            newState.entries = action.payload.answers
             return newState;
 
         case POST_ANSWER:
