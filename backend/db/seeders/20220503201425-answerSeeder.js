@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Answers', [
-      {body: "According to a children's song, he 'sees you when you\'re sleeping and knows when you're awake", userId: 1},
+      {body: "According to a children's song, he sees you when you're sleeping and knows when you're awake", userId: 1},
       {body: "The chemical Iodine is associated with this color, along with royalty and a dinosaur who loves you.", userId: 2},
       {body: "When you see starlight, know it's from the star burning this gas, whose symbol is H.", userId: 3},
       {body: "In the title of a Dr. Seuss book, it's served with Green Eggs.", userId: 1},

@@ -2,6 +2,7 @@ const router = require('express').Router();
 const sessionRouter = require('./session');
 const usersRouter = require('./users');
 const answersRouter = require('./answers')
+const questionsRouter = require('./questions')
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
