@@ -26,13 +26,12 @@ export const answerFetch = () => async (dispatch) => {
 }
 
 export const addAnswer = (answer) => async (dispatch) => {
-    const {body, userId, createdAt} = answer;
+    const {body, userId} = answer;
     const response = await csrfFetch('/api/answers', {
         method: 'POST',
         body: JSON.Stringify({
             body,
-            userId,
-            createdAt
+            userId
         })
     })
     const data = response.json()
@@ -51,7 +50,7 @@ const answersReducer = (state = initialState, action) => {
 
         case POST_ANSWER:
             newState = {...state}
-            newState.entries = [action.payload, ...newState.entries];
+            newState.entries = [action.payload.answer, newState.entries];
             return newState;
 
         default: return state;

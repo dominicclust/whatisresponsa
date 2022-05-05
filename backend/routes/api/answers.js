@@ -29,6 +29,7 @@ router.delete('/:id', restoreUser, asyncHandler(async(req, res) => {
 router.get('/:id', restoreUser, asyncHandler(async(req, res) => {
     const {id} = req.body
     const answer = await Answer.findByPk(id, {include: [User, Question]})
+
     return res.json(answer)
 }))
 
@@ -37,6 +38,6 @@ router.post('/:id', restoreUser, asyncHandler(async(req, res) => {
     const {username} = await User.findByPk(userId)
     const question = await Question.create({id, body, answerId, username, createdAt})
     return res.json(question)
-})
-)
+}))
+
 module.exports = router;

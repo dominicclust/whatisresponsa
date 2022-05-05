@@ -9,6 +9,11 @@
     padding: 5px 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+.addAnswer {
+    border-radius: 20%;
+    width: 12%;
+    height: 7%;
+}
 .nav {
     background-color: #FA0020;
     display: flex;

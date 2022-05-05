@@ -1,0 +1,21 @@
+.form {
+    padding: 60px;
+    box-shadow: 0 0 4px 4px #AAA;
+
+}
+
+.label {
+    font-size: 1.1rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.textarea {
+    border-radius: 5px;
+    height: 100px;
+    width: 160 px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.button {
+    border-radius: 5px;
+}
