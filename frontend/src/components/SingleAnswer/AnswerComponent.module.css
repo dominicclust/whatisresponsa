@@ -4,7 +4,7 @@
     align-items: center
 }
 .answerDiv {
-    width: 50%;
+    width: max-content;
     padding: 5px 5px;
     margin: 1px 30px;
     background-color: #0722AA;

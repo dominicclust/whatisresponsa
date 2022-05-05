@@ -15,9 +15,7 @@ function Navigation({ isLoaded }) {
         sessionLinks = (
         <span>
             <ProfileButton id={styles.i} user={sessionUser} />
-            <Route path='answers/new'>
-                <AddAnswerModal className={styles.addAnswer}/>
-            </Route>
+            <AddAnswerModal />
         </span>
         )
     } else sessionLinks = (
@@ -32,10 +30,9 @@ function Navigation({ isLoaded }) {
     )
     return (
         <nav className={styles.nav}>
-            <NavLink className={styles.link} exact to='/'>
+            <NavLink className={styles.link} to='/answers'>
                 <i id={styles.i} className='fa-solid fa-house'></i>
             </NavLink>
-
             {isLoaded && sessionLinks}
         </nav>
     )

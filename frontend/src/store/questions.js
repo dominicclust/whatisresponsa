@@ -24,3 +24,4 @@ const questionsReducer = (state = initialState, action) => {
             return state;
     }
 }
+export default questionsReducer
