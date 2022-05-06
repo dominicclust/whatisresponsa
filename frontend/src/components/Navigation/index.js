@@ -13,10 +13,14 @@ function Navigation({ isLoaded }) {
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
-        <span>
-            <ProfileButton id={styles.i} user={sessionUser} />
-            <AddAnswerModal />
-        </span>
+        <>
+            <span>
+                <ProfileButton id={styles.i} user={sessionUser} />
+            </span>
+            <span>
+                <AddAnswerModal />
+            </span>
+        </>
         )
     } else sessionLinks = (
         <>
@@ -33,6 +37,7 @@ function Navigation({ isLoaded }) {
             <NavLink className={styles.link} to='/answers'>
                 <i id={styles.i} className='fa-solid fa-house'></i>
             </NavLink>
+            <span className={styles.navSpace}></span>
             {isLoaded && sessionLinks}
         </nav>
     )

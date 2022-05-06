@@ -1,13 +1,16 @@
 .sessionLinks:hover {
     font-weight: bold;
     background-color: #FAFBFC;
-    color: #FA0020;
+    color: #2022AA;
 }
 .sessionLinks {
     text-decoration: none;
     font-size: 1.1 rem;
     padding: 5px 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .addAnswer {
     border-radius: 20%;
@@ -15,18 +18,17 @@
     height: 7%;
 }
 .nav {
-    background-color: #FA0020;
+    background-color: #2022AA;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     position: fixed;
     top: 0;
     width: 100%;
 }
-.link {
+.link, .link:active, .link:hover, .link:visited {
     text-decoration: none;
     font-size: 1.1 rem;
-    background-color: #FA0020;
+    background-color: #2022AA;
     color: #FAFBFC;
 }
 #i{
@@ -34,4 +36,7 @@
     width: 30px;
     height: 30px;
 
+}
+.navSpace{
+    width: 80%
 }

@@ -10,9 +10,11 @@ const AddAnswerModal = () => {
 
     return (
         <>
-            <Link  onClick={()  => setShowModal(true)} className={styles.modal} to='/answers/new'>Add Answer</Link>
+            <button className={styles.button}>
+                <Link  onClick={() => setShowModal(true)} to='/answers/new'>Add Answer</Link>
+            </button>
             {showModal && (
-                <Modal onClose={() => setShowModal(false)}>
+                <Modal className={styles.modal} onClose={() => setShowModal(false)}>
                     <AddAnswer />
                 </Modal>
             )}
