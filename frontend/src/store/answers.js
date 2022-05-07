@@ -1,5 +1,6 @@
 import { csrfFetch } from "./csrf";
 
+
 const GET_ANSWERS = 'answers/getAnswers';
 const POST_ANSWER = 'answers/postAnswer';
 const EDIT_ANSWER = 'answers/editAnswer';
@@ -36,7 +37,6 @@ export const answerFetch = () => async (dispatch) => {
     const response = await csrfFetch('/api/answers')
     if (response.ok) {
         const answers = await response.json();
-        console.log(answers)
         dispatch(getAnswers(answers))
     }
 }
@@ -52,13 +52,14 @@ export const addAnswer = (answer) => async (dispatch) => {
     })
     if (response.ok) {
         const answer = response.json()
+        console.log(answer)
         dispatch(postAnswer(answer))
     }
 }
 
 export const answerEditor = (answer) => async(dispatch) => {
-    const {body, userId} = answer;
-    const response = await csrfFetch('/api/answers', {
+    const {id, body, userId} = answer;
+    const response = await csrfFetch(`/api/answers/${id}`, {
         method: 'PUT',
         body: JSON.stringify({body, userId})
     })
@@ -67,9 +68,13 @@ export const answerEditor = (answer) => async(dispatch) => {
         dispatch(editAnswer(answer))
     }
 }
-export const answerDestroyer = (answer) => async(dispatch) => {
-
-    dispatch(deleteAnswer(answer))
+export const answerDeleter = answer => async(dispatch) => {
+    let answerId = answer.id
+    const res = await csrfFetch(`/api/answers/${answerId}`)
+    if (res.ok){
+        await csrfFetch(`/api/answers/${answerId}`, {method: 'DELETE'})
+        dispatch(deleteAnswer(answer))
+    }
 }
 
 const initialState = {entries: []}
@@ -93,8 +98,8 @@ const answersReducer = (state = initialState, action) => {
             return newState;
 
         case DELETE_ANSWER:
-            newState = {...state}
-            newState.entries.delete(action.payload)
+            newState = {...state,
+                        entries: state.entries.filter((entry) => entry !== action.payload.answer)}
             return newState;
 
         default: return state;

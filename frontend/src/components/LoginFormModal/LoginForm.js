@@ -21,13 +21,10 @@ const LoginForm = () => {
         })
     }
     const demoLogin = () => {
-        setCredential('iEmmaDemo')
-        setPassword('password3')
-
-        return dispatch(sessionActions.login({ credential, password })).then(<Redirect to='/answers'/>)
+        return dispatch(sessionActions.login({ credential: 'iEmmaDemo', password: 'password3' })).then(<Redirect to='/answers'/>)
     }
     const toSignup = () => {
-        return (<Redirect to='/signup' />)
+        return <Redirect to='/signup' />
     }
 
     return (
@@ -70,7 +67,7 @@ const LoginForm = () => {
                 </div>
                 <div>
                     <p>New to Responsa?</p>
-                    <Link to='/signup' onClick={toSignup}>Sign up!</Link>
+                    <Link to='/signup' onClick={toSignup()}>Sign up!</Link>
                 </div>
             </form>
         </div>

@@ -17,29 +17,31 @@ function Navigation({ isLoaded }) {
             <span>
                 <ProfileButton id={styles.i} user={sessionUser} />
             </span>
-            <span>
+            <NavLink to='/answers/new' classname={styles.addAnswer}>
                 <AddAnswerModal />
-            </span>
+            </NavLink>
         </>
         )
     } else sessionLinks = (
         <>
-            <span>
+            <NavLink to='/login'>
                 <LoginFormModal className={styles.sessionLinks}>Log In</LoginFormModal>
-            </span>
-            <span>
+            </NavLink>
+            <NavLink to='/signup'>
                 <SignupFormModal className={styles.sessionLinks}>Sign Up</SignupFormModal>
-            </span>
+            </NavLink>
         </>
     )
     return (
-        <nav className={styles.nav}>
-            <NavLink className={styles.link} to='/answers'>
-                <i id={styles.i} className='fa-solid fa-house'></i>
-            </NavLink>
-            <span className={styles.navSpace}></span>
-            {isLoaded && sessionLinks}
-        </nav>
+        sessionUser
+            ?   <nav className={styles.navOn}>
+                    <NavLink className={styles.link} to='/answers'>
+                        <i id={styles.i} className='fa-solid fa-house'></i>
+                    </NavLink>
+                    <span className={styles.navSpace}></span>
+                    {isLoaded && sessionLinks}
+                </nav>
+            : <nav className={styles.navOff}>{sessionLinks}</nav>
     )
 }
 export default Navigation;

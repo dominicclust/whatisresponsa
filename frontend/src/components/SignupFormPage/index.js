@@ -6,7 +6,7 @@ import styles from '../Navigation/Navigation.module.css'
 
 const SignupFormModal = () => {
     const [showModal, setShowModal] = useState(false)
-    
+
     return (
         <>
             <NavLink onClick={()  => setShowModal(true)} className={styles.sessionLinks} to='/signup'>Sign up</NavLink>

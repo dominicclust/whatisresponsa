@@ -19,14 +19,21 @@ router.post('/', restoreUser, asyncHandler(async(req, res) => {
     return res.json(answer)
 }))
 
+router.put('/:id', restoreUser, asyncHandler(async(req, res) => {
+    const {id, body} = req.body;
+    const answer = await Answer.findByPk(id, {include: User})
+    answer.body = body;
+    return res.json(answer)
+
+}))
 router.delete('/:id', restoreUser, asyncHandler(async(req, res) => {
-    const {id} = req.params
+    const {id} = req
     const answer = await Answer.findByPk(id)
-    answer.destroy();
+    await answer.destroy();
 }))
 
 router.get('/:id', restoreUser, asyncHandler(async(req, res) => {
-    const {id} = req.params
+    const {id} = req.params.id
     const answer = await Answer.findByPk(id, {include: [User, Question]})
 
     return res.json(answer)

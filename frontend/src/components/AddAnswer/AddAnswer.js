@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import styles from './AnswerForm.module.css'
 import * as answerActions from '../../store/answers'
 
-export const AddAnswer = () => {
+export const AddAnswer = ({handleClose}) => {
     const [errors, setErrors] = useState([]);
     const [body, setBody] = useState('')
     const [answer, setAnswer] = useState({})
@@ -18,16 +18,13 @@ export const AddAnswer = () => {
         if (body.length === 0) validationErrors.push("We can't find your question if you don't give us your answer! Type your answer below!")
         const userId = user.id
         if (errors.length === 0 && validationErrors.length === 0) {
-            setAnswer({body, userId})
-            dispatch(answerActions.addAnswer(answer))
+            setAnswer({body, userId, createdAt: Date.now()})
+            dispatch(answerActions.addAnswer(answer)).then(<Redirect to='/answers' />)
         } else {
             setErrors(validationErrors)
         }
     }
-    const handleClick = (e) => {
-        e.preventDefault()
-        if (errors.length === 0)  return <Redirect exact to='/answers' />
-    }
+
     return (
         <div>
             <form className={styles.form} onSubmit={handleSubmit}>
@@ -42,6 +39,8 @@ export const AddAnswer = () => {
                     </label>
                     <br></br>
                         <textarea
+                        rows='20'
+                        cols='100'
                         className={styles.textarea}
                         name='body'
                         value={body}
@@ -49,7 +48,10 @@ export const AddAnswer = () => {
                         />
                 </div>
                 <br></br>
-                <button onClick={handleClick} type='submit'>Submit your answer</button>
+                <span className={styles.buttonSpan}>
+                    <button className={styles.formButton} onclick={handleClose} type='submit'>Submit your answer</button>
+                    <button onClick={handleClose} className={styles.formButton}>Cancel</button>
+                </span>
             </form>
         </div>
     )
