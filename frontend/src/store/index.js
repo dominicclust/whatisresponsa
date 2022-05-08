@@ -5,9 +5,9 @@ import answersReducer from './answers'
 import questionsReducer from './questions'
 
 const rootReducer = combineReducers({
-    session: sessionReducer,
-    answers: answersReducer,
-    questions: questionsReducer,
+    sessionState: sessionReducer,
+    answerState: answersReducer,
+    questionState: questionsReducer,
 })
 
 //will be set to different store enhancers depending on environment

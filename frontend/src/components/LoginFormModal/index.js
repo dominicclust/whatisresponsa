@@ -6,9 +6,9 @@ import styles from '../Navigation/Navigation.module.css'
 import { useSelector } from 'react-redux';
 
 
-const LoginFormModal = () => {
+const LoginFormModal = ({onClose}) => {
     const [showModal, setShowModal] = useState(false)
-    const user = useSelector( state=> state.session.user)
+    const user = useSelector(state => state.sessionState.user)
     useEffect(() => {
         if (!user) setShowModal(true)
     }, [user])

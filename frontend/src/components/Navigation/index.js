@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import ProfileButton from './ProfileButton'
 import {useSelector} from 'react-redux'
 import { NavLink } from 'react-router-dom'
@@ -8,18 +8,20 @@ import AddAnswerModal from '../AddAnswer'
 import styles from './Navigation.module.css'
 
 function Navigation({ isLoaded }) {
-    const sessionUser = useSelector(state => state.session.user)
+    const user = useSelector(state => state.sessionState.user)
+    const [showModal, setShowModal] = useState(false)
+    useEffect(() => {
+        if (!user) setShowModal(true)
+    })
 
     let sessionLinks;
-    if (sessionUser) {
+    if (user) {
         sessionLinks = (
         <>
             <span>
-                <ProfileButton id={styles.i} user={sessionUser} />
+                <ProfileButton user={user} />
+                <AddAnswerModal user={user} />
             </span>
-            <NavLink to='/answers/new' classname={styles.addAnswer}>
-                <AddAnswerModal />
-            </NavLink>
         </>
         )
     } else sessionLinks = (
@@ -33,7 +35,7 @@ function Navigation({ isLoaded }) {
         </>
     )
     return (
-        sessionUser
+        user
             ?   <nav className={styles.navOn}>
                     <NavLink className={styles.link} to='/answers'>
                         <i id={styles.i} className='fa-solid fa-house'></i>
@@ -41,7 +43,7 @@ function Navigation({ isLoaded }) {
                     <span className={styles.navSpace}></span>
                     {isLoaded && sessionLinks}
                 </nav>
-            : <nav className={styles.navOff}>{sessionLinks}</nav>
+            : <nav className={styles.navOff}>{showModal && sessionLinks}</nav>
     )
 }
 export default Navigation;

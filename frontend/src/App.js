@@ -4,8 +4,7 @@ import * as sessionActions from './store/session'
 import * as answerActions from './store/answers'
 import Navigation from './components/Navigation'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import SingleAnswer from './components/SingleAnswer'
-import SplashPageModal from './components/SplashPage'
+import SplashPage from './components/SplashPage'
 import LoginFormModal from './components/LoginFormModal';
 import SignupFormModal from './components/SignupFormPage';
 import AddAnswerModal from './components/AddAnswer';
@@ -13,37 +12,39 @@ import { AnswerContainer } from './components/AnswerComponent/AnswerContainer';
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const user = useSelector(state => state.session.user)
-  const answers = useSelector(state => state.answers.entries)
+
+  const user = useSelector(state => state.sessionState.user)
+  const answers = useSelector(state => state.answerState.entries)
+
   useEffect(() => {
-      dispatch(answerActions.answerFetch())
-      dispatch(sessionActions.restoreUser()).then(()=> setIsLoaded(true))
-  }, [dispatch, answerActions, sessionActions])
+    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
+  }, [dispatch])
+
+  useEffect(() => {
+    if (user) return dispatch(answerActions.answerFetch())
+  }, [user])
+
 
   return (
     <>
       <Navigation isLoaded={isLoaded} />
       <Switch>
-        <Route exact path='/'>
-          {user ? <Redirect to='/answers' /> : <SplashPageModal /> }
-        </Route>
-        <Route path='/answers/new'>
-            <AddAnswerModal />
-        </Route>
         <Route path='/login'>
           <LoginFormModal/>
         </Route>
         <Route path='/signup'>
           <SignupFormModal />
         </Route>
-        <Route path='/answers'>
-          <AnswerContainer answers={answers}/>
+        <Route exact path='/'>
+          <SplashPage />
         </Route>
-        <Route path='/answers/:id'>
-          <SingleAnswer />
+        <Route path='/answers'>
+          <AnswerContainer />
+        </Route>
+        <Route path='/answers/new'>
+          <AddAnswerModal />
         </Route>
       </Switch>
-
     </>
   );
 };

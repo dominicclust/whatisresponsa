@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as sessionActions from '../../store/session'
 import styles from './LoginForm.module.css'
-import {Link, Redirect} from 'react-router-dom'
+import {NavLink, Redirect} from 'react-router-dom'
 
 const LoginForm = () => {
     const dispatch = useDispatch();
     const [credential, setCredential] = useState('')
     const [password, setPassword] = useState('')
     const [valErrors, setValErrors] = useState([])
-
+    const user = useSelector(state => state.sessionState.user)
+    if (user) return (
+        <Redirect to='/answers' />
+    )
     const onSubmit = (e) => {
         e.preventDefault();
         setValErrors([])
@@ -18,20 +21,20 @@ const LoginForm = () => {
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setValErrors(data.errors)
+
         })
     }
-    const demoLogin = () => {
-        return dispatch(sessionActions.login({ credential: 'iEmmaDemo', password: 'password3' })).then(<Redirect to='/answers'/>)
-    }
-    const toSignup = () => {
-        return <Redirect to='/signup' />
+    const demoLogin = async() => {
+        await setCredential('iEmmaDemo');
+        await setPassword('password3')
+        return dispatch(sessionActions.login({ credential, password }))
     }
 
     return (
         <div>
             <form className={styles.form} onSubmit={onSubmit}>
                 <ul>
-                    {valErrors.map((error, i) => (
+                    {valErrors && valErrors.map((error, i) => (
                         <li key={i}>{error}</li>)
                     )}
                 </ul>
@@ -63,11 +66,11 @@ const LoginForm = () => {
                 </div>
                 <div>
                     <button className={styles.button} type='submit'>Log In</button>
-                    <button className={styles.button} onClick={demoLogin}>Demo Login</button>
+                    <button className={styles.button} onClick={demoLogin} type='submit'>Demo Login</button>
                 </div>
                 <div>
                     <p>New to Responsa?</p>
-                    <Link to='/signup' onClick={toSignup()}>Sign up!</Link>
+                    <NavLink to='/signup' onClick={() => (<Redirect to='/signup' />)} >Sign up!</NavLink>
                 </div>
             </form>
         </div>

@@ -4,22 +4,21 @@ import { Redirect } from 'react-router-dom';
 import styles from './AnswerForm.module.css'
 import * as answerActions from '../../store/answers'
 
-export const AddAnswer = ({handleClose}) => {
+export const AddAnswer = ({onClose}) => {
     const [errors, setErrors] = useState([]);
     const [body, setBody] = useState('')
     const [answer, setAnswer] = useState({})
     const dispatch = useDispatch()
 
-    const user = useSelector(state => state.session.user)
+    const user = useSelector(state => state.sessionState.user)
 
     const handleSubmit = (e) => {
-        e.preventDefault()
         const validationErrors = [];
         if (body.length === 0) validationErrors.push("We can't find your question if you don't give us your answer! Type your answer below!")
         const userId = user.id
         if (errors.length === 0 && validationErrors.length === 0) {
             setAnswer({body, userId, createdAt: Date.now()})
-            dispatch(answerActions.addAnswer(answer)).then(<Redirect to='/answers' />)
+            dispatch(answerActions.addAnswer(answer)).then(() => onClose && (<Redirect to='/answers' />))
         } else {
             setErrors(validationErrors)
         }
@@ -29,7 +28,7 @@ export const AddAnswer = ({handleClose}) => {
         <div>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <ul>
-                    {errors && errors.map((error, i) => (
+                    {errors.length > 0 && errors.map((error, i) => (
                         <li key={i}>{error}</li>)
                     )}
                 </ul>
@@ -46,12 +45,12 @@ export const AddAnswer = ({handleClose}) => {
                         value={body}
                         onChange={(e) => setBody(e.target.value)}
                         />
+                    <br></br>
+                    <span className={styles.buttonSpan}>
+                        <button className={styles.formButton} type='submit'>Submit your answer</button>
+                        <button onClick={onClose} className={styles.formButton}>Cancel</button>
+                    </span>
                 </div>
-                <br></br>
-                <span className={styles.buttonSpan}>
-                    <button className={styles.formButton} onclick={handleClose} type='submit'>Submit your answer</button>
-                    <button onClick={handleClose} className={styles.formButton}>Cancel</button>
-                </span>
             </form>
         </div>
     )

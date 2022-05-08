@@ -9,7 +9,7 @@ const router = express.Router()
 // /backend/routes/api/answers.js
 
 router.get('/', restoreUser, asyncHandler(async(req, res) => {
-    const answers = await Answer.findAll({include: User});
+    const answers = await Answer.findAll({include: [User, Question]});
     return res.json(answers)
 }))
 
@@ -19,25 +19,25 @@ router.post('/', restoreUser, asyncHandler(async(req, res) => {
     return res.json(answer)
 }))
 
-router.put('/:id', restoreUser, asyncHandler(async(req, res) => {
-    const {id, body} = req.body;
-    const answer = await Answer.findByPk(id, {include: User})
-    answer.body = body;
+router.get('/:id', restoreUser, asyncHandler(async(req, res) => {
+    const {id} = req.params.url
+    const answer = await Answer.findByPk( {include: [User, Question]})
     return res.json(answer)
+}))
+
+router.put('/:id', restoreUser, asyncHandler(async(req, res) => {
+    const {newBody} = req.body
+    const answer = await Answer.findByPk(req.params.id, {include: User})
+    const newAnswer = await answer.update({body: JSON.stringify(newBody)})
+    return await res.json(newAnswer)
 
 }))
 router.delete('/:id', restoreUser, asyncHandler(async(req, res) => {
-    const {id} = req
-    const answer = await Answer.findByPk(id)
+    const answer = await Answer.findByPk(req.params.id)
     await answer.destroy();
+    return answer.id
 }))
 
-router.get('/:id', restoreUser, asyncHandler(async(req, res) => {
-    const {id} = req.params.id
-    const answer = await Answer.findByPk(id, {include: [User, Question]})
-
-    return res.json(answer)
-}))
 
 router.post('/:id', restoreUser, asyncHandler(async(req, res) => {
     const {id, body, answerId, userId, createdAt} = req.body;
