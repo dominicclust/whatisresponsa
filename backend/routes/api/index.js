@@ -7,6 +7,7 @@ const questionsRouter = require('./questions')
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/answers', answersRouter);
+router.use(questionsRouter)
 
 
 // Middleware Testing!

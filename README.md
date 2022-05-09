@@ -1,7 +1,11 @@
 # What is Responsa?
 
-Users come in with a wide variety of answers and can get an even wider array of questions on Responsa. The app is inspired by the website **Quora** and the game show __Jeopardy__
+In a mashup of the web application *Quora* and the hit game-show _Jeopardy_
+*_Responsa_* is an app, in which users submit answers in hopes that they can find the right questions.
 
-## What is an answer?
+## About
+
+Users need to create an account to view answersUsers are able to post answers of all types
+### What is an answer?
 
 An answer can be a fragment, a statement, or a paragraph of information that corresponds to a fairly specific question.

@@ -1,31 +1,48 @@
-import React, { useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { answerFetch } from '../../store/answers';
-import { NavLink } from 'react-router-dom';
-// import { SingleAnswer } from './SingleAnswer'
+import { Redirect, Route, NavLink } from 'react-router-dom';
 import styles from './AnswerComponent.module.css'
+import * as answerActions from '../../store/answers'
 
 export const AnswerContainer = () => {
+    const [userButtons, setUserButtons] = useState(false)
+    const sessionUser = useSelector(state => state.sessionState.user);
+    const answers = useSelector(state => state.answerState.entries)
+    const answerArray = Object.values(answers)
 
-    const answers = useSelector(state => state.answers.entries)
     const dispatch = useDispatch()
-    console.log('-------------',answers[0])
-    useEffect(()=>{
-        dispatch(answerFetch(...answers))
-    }, [dispatch])
+
+
+    const onDeleteClick = (e) => {
+        e.preventDefault();
+
+    }
+
+
 
     return (
         <div className={styles.answerContainer}>
-            {answers.map((answer) => {
+            {answers && answerArray.map(answer => {
+                const {answerId, body, userId, createdAt} = answer;
                 return (
                     <div className={styles.answerDiv}>
-                        <NavLink className={styles.navLink} to={`/answers/${answer.id}`}>
-                            <h2 className={styles.heading}>{answer.body}</h2>
-                        </NavLink>
-                        <p>Posted by {answer.User.username} on {answer.createdAt}</p>
+                    <NavLink key={answerId} to={`/answers/${answerId}`}>
+                        <h2 className={styles.heading}>{answer.body}</h2>
+                    </NavLink>
+                        <span>
+                            {sessionUser.id === userId
+                                ?   <>
+                                        <button className={styles.button} >Edit</button>
+                                        <button onClick={() => onDeleteClick()} className={styles.button} >Delete</button>
+                                    </>
+                                :   <></>
+                            }
+                            <p>Posted by {answer.User.username} on {answer.createdAt.toDateString()}</p>
+                        </span>
                     </div>
                 )
-            })}
+                        })}
+
         </div>
     )
 }
