@@ -21,14 +21,15 @@ function App() {
   }, [dispatch])
 
   useEffect(() => {
-    if (user && isLoaded) return dispatch(answerActions.answerFetch())
-  }, [dispatch])
+    dispatch(answerActions.answerFetch())
+  }, [])
+
 
   return (
     <>
       <Navigation isLoaded={isLoaded} />
       <Switch>
-        <Route exact path={['/', '/login', '/signup']}>
+        <Route path={['/', '/login', '/signup']} exact>
           <SplashPage />
         </Route>
         <Route path={['/answers', '/answers/:answerId']}>

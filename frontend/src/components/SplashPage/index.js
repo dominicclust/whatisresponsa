@@ -3,28 +3,26 @@ import { useSelector } from "react-redux";
 import { Redirect, Switch, Route} from 'react-router-dom';
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormPage";
+import styles from './SplashPage.module.css'
 
 const SplashPage = () => {
-    const [showModal, setShowModal] = useState(false);
     const user = useSelector(state => state.sessionState.user)
 
-    if (user) {
-        return (<Redirect to='/answers' />)
-    } else setShowModal(true)
-
     let splash;
-    if (showModal) {
+    if (!user) {
         splash = (
-            <>
+            <div className={styles.background} >
                     <LoginFormModal />
                     <SignupFormModal />
-            </>
+            </div>
         )
+    } else {
+        splash = (<Redirect to='/answers' />)
     }
 
 
     return (
-        <>
+        <div className={styles.inset}>
             {splash}
             <Switch>
                 <Route path='/login'>
@@ -34,7 +32,7 @@ const SplashPage = () => {
                     <SignupFormModal />
                 </Route>
             </Switch>
-        </>
+        </div>
     )
 }
 export default SplashPage;

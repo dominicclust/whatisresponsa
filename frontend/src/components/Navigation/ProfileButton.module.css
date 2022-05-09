@@ -1,6 +1,13 @@
-#i {
+.i {
     width: 2rem;
     height: 2rem;
+    border: none;
+    background-color: #2022AA;
+    text-decoration: none;
+}
+.i:hover, .i:active, .i:visited {
+    text-decoration: none;
+
 }
 .button {
     border: none;
@@ -12,11 +19,13 @@
 }
 .profileDrop {
     position: absolute;
+    top:61px;
     background-color: #2022AA;
 
 
 }
 .profileInfo {
     font-size: 1.5rem;
-    color: #2022AA
+    color: #FEFEFE;
+    position: relative;
 }

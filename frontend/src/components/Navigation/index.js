@@ -28,13 +28,14 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    <nav className={styles.navOn}>
-        <NavLink className={styles.link} exact to="/">Home</NavLink>
+      <nav className={styles.navOn}>
+        <NavLink className={styles.link} exact to="/">
+          <i className={`fa-solid fa-house-chimney-user ${styles.link}`}></i>
+        </NavLink>
         <span className={styles.navSpace}></span>
         {isLoaded && sessionLinks}
-    </nav>
-
-  );
+      </nav>
+    )
 }
 
 export default Navigation;

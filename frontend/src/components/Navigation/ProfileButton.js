@@ -22,22 +22,28 @@ function ProfileButton({ user }) {
       return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
 
+    // useEffect(() => {
+    //   const hover = (e) => {
+
+    //   }
+    // })
     const logout = (e) => {
       e.preventDefault();
-      dispatch(sessionActions.logout());
+      dispatch(sessionActions.logout())
+      return (<Redirect exact to='/' />)
     };
 
     return (
       <>
-        <button onClick={openMenu}>
-          <i className="fas fa-user-circle" />
+        <button onClick={openMenu} >
+          <i className={`fas fa-id-badge ${styles.i}`}  />
         </button>
         {showMenu && (
-          <ul className="profile-dropdown">
+          <ul className={styles.profileDrop}>
             <li>{user.username}</li>
             <li>{user.email}</li>
             <li>
-              <button onClick={logout}>Log Out</button>
+              <button onClick={logout} className={styles.button}>Log Out</button>
             </li>
           </ul>
         )}

@@ -1,0 +1,14 @@
+.background {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    background-color: #2022AA;
+    margin: 10px;
+}
+.inset {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    height: 100%
+}

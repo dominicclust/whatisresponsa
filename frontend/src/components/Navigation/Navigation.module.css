@@ -32,16 +32,17 @@
     left: 0;
     right: 0;
     width: 100%;
-    padding: 20px;
+    height: 60px;
 
 }
 .link, .link:active, .link:hover, .link:visited {
     text-decoration: none;
-    font-size: 1.1 rem;
+    width: 5%;
+    height: 5%;
     background-color: #2022AA;
     color: #FAFBFC;
 }
-#i{
+.i{
     padding: 10px 10px;
     width: 30px;
     height: 30px;

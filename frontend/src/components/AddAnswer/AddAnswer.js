@@ -17,12 +17,11 @@ export const AddAnswer = ({onClose}) => {
         const validationErrors = [];
         if (body.length === 0) validationErrors.push("We can't find your question if you don't give us your answer! Type your answer below!")
         setErrors(validationErrors)
-        dispatch(answerActions.addAnswer({body, userId: user.user.id}))
+        return dispatch(answerActions.addAnswer({body, userId: user.id}))
             .catch(async(res) => {
                 const data = await res.json()
                 if (data && data.errors) setErrors(data.errors)
             })
-        return <Redirect to='/answers' />
     }
 
 

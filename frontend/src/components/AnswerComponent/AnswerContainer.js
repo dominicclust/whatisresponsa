@@ -4,30 +4,25 @@ import { Redirect, Route, NavLink } from 'react-router-dom';
 import styles from './AnswerComponent.module.css'
 import * as answerActions from '../../store/answers'
 
-export const AnswerContainer = () => {
+export function AnswerContainer () {
     const [userButtons, setUserButtons] = useState(false)
     const sessionUser = useSelector(state => state.sessionState.user);
     const answers = useSelector(state => state.answerState.entries)
-    const answerArray = Object.values(answers)
-
     const dispatch = useDispatch()
-
+    console.log(answers)
 
     const onDeleteClick = (e) => {
         e.preventDefault();
-
     }
-
-
 
     return (
         <div className={styles.answerContainer}>
-            {answers && answerArray.map(answer => {
+            {answers && answers.map(answer => {
                 const {answerId, body, userId, createdAt} = answer;
                 return (
                     <div className={styles.answerDiv}>
                     <NavLink key={answerId} to={`/answers/${answerId}`}>
-                        <h2 className={styles.heading}>{answer.body}</h2>
+                        <h2 className={styles.heading}>{body}</h2>
                     </NavLink>
                         <span>
                             {sessionUser.id === userId
@@ -37,7 +32,7 @@ export const AnswerContainer = () => {
                                     </>
                                 :   <></>
                             }
-                            <p>Posted by {answer.User.username} on {answer.createdAt.toDateString()}</p>
+                            <p>Posted by {answer.User.username} on {createdAt.toDateString()}</p>
                         </span>
                     </div>
                 )

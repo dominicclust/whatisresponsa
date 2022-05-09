@@ -76,7 +76,7 @@ const sortEntries = (entries) => {
     })
 }
 
-const initialState = {entries: {}}
+const initialState = {entries: []}
 const answersReducer = (state = initialState, action) => {
     let newState = {};
     switch (action.type) {

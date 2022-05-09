@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as sessionActions from '../../store/session'
 import styles from './LoginForm.module.css'
 import {NavLink, Redirect} from 'react-router-dom'
 
 const LoginForm = () => {
     const dispatch = useDispatch();
+    const sessionUser = useSelector(state => state.sessionState.user)
     const [credential, setCredential] = useState('')
     const [password, setPassword] = useState('')
     const [valErrors, setValErrors] = useState([])
+
+    if (sessionUser) {
+        return (<Redirect to='/answers' />)
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
         setValErrors([])
@@ -24,10 +30,15 @@ const LoginForm = () => {
         await setCredential('iEmmaDemo');
         await setPassword('password3')
         return dispatch(sessionActions.login({ credential, password }))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setValErrors(data.errors)
+            })
     }
 
     return (
-        <div>
+        !sessionUser
+        ? <div>
             <form className={styles.form} onSubmit={onSubmit}>
                 <ul>
                     {valErrors && valErrors.map((error, i) => (
@@ -70,6 +81,7 @@ const LoginForm = () => {
                 </div>
             </form>
         </div>
+        : <Redirect to='/answers'/>
     )
 }
 
