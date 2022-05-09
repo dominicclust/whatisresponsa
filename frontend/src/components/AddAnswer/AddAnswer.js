@@ -7,22 +7,24 @@ import * as answerActions from '../../store/answers'
 export const AddAnswer = ({onClose}) => {
     const [errors, setErrors] = useState([]);
     const [body, setBody] = useState('')
-    const [answer, setAnswer] = useState({})
     const dispatch = useDispatch()
-
     const user = useSelector(state => state.sessionState.user)
 
+
     const handleSubmit = (e) => {
+        e.preventDefault()
+        setErrors([])
         const validationErrors = [];
         if (body.length === 0) validationErrors.push("We can't find your question if you don't give us your answer! Type your answer below!")
-        const userId = user.id
-        if (errors.length === 0 && validationErrors.length === 0) {
-            setAnswer({body, userId, createdAt: Date.now()})
-            dispatch(answerActions.addAnswer(answer)).then(() => onClose && (<Redirect to='/answers' />))
-        } else {
-            setErrors(validationErrors)
-        }
+        setErrors(validationErrors)
+        dispatch(answerActions.addAnswer({body, userId: user.user.id}))
+            .catch(async(res) => {
+                const data = await res.json()
+                if (data && data.errors) setErrors(data.errors)
+            })
+        return <Redirect to='/answers' />
     }
+
 
     return (
         <div>
@@ -38,8 +40,6 @@ export const AddAnswer = ({onClose}) => {
                     </label>
                     <br></br>
                         <textarea
-                        rows='20'
-                        cols='100'
                         className={styles.textarea}
                         name='body'
                         value={body}

@@ -25,11 +25,14 @@
 .navOn {
     background-color: #2022AA;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+    width: 100%;
+    padding: 20px;
 
 }
 .link, .link:active, .link:hover, .link:visited {
@@ -45,7 +48,7 @@
 
 }
 .navSpace{
-    width: 80%
+    width: 70%
 }
 
 .navOff {

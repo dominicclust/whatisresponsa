@@ -1,4 +1,6 @@
 .answerContainer {
+    position: absolute;
+    top: 42px;
     display: flex;
     flex-direction: column;
     align-items: center

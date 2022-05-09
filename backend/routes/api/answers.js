@@ -14,14 +14,14 @@ router.get('/', restoreUser, asyncHandler(async(req, res) => {
 }))
 
 router.post('/', restoreUser, asyncHandler(async(req, res) => {
-    const {id, body, userId, createdAt} = req.body
-    const answer = await Answer.create({id, body, userId, createdAt})
+    const {body, userId} = req.body
+    const answer = await Answer.create({body, userId})
     return res.json(answer)
 }))
 
 router.get('/:id', restoreUser, asyncHandler(async(req, res) => {
-    const {id} = req.params.url
-    const answer = await Answer.findByPk( {include: [User, Question]})
+    const {id} = req.body
+    const answer = await Answer.findByPk(id, {include: [User, Question]})
     return res.json(answer)
 }))
 
@@ -33,9 +33,10 @@ router.put('/:id', restoreUser, asyncHandler(async(req, res) => {
 
 }))
 router.delete('/:id', restoreUser, asyncHandler(async(req, res) => {
-    const answer = await Answer.findByPk(req.params.id)
+    const {id} = req.body
+    const answer = await Answer.findByPk(id)
     await answer.destroy();
-    return answer.id
+    return res.json(answer.id)
 }))
 
 

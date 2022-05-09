@@ -12,8 +12,8 @@ const AddAnswerModal = () => {
         <>
             <NavLink  onClick={() => setShowModal(true)} to='/answers/new'>Add Answer</NavLink>
             {showModal && (
-                <Modal className={styles.modal} onClose={() => setShowModal(false)} >
-                    <AddAnswer onClose={() => setShowModal(false)}/>
+                <Modal onClose={() => setShowModal(false)} >
+                    <AddAnswer onClose={() => setShowModal(false)} onSubmit={() => <Redirect to='/answers'/>} />
                 </Modal>
             )}
         </>

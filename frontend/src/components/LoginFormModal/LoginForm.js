@@ -9,10 +9,6 @@ const LoginForm = () => {
     const [credential, setCredential] = useState('')
     const [password, setPassword] = useState('')
     const [valErrors, setValErrors] = useState([])
-    const user = useSelector(state => state.sessionState.user)
-    if (user) return (
-        <Redirect to='/answers' />
-    )
     const onSubmit = (e) => {
         e.preventDefault();
         setValErrors([])

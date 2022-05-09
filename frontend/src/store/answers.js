@@ -43,8 +43,8 @@ export const addAnswer = (answer) => async (dispatch) => {
         })
     })
     if (response.ok) {
-        const answer = await response.json()
-        dispatch(postAnswer(answer))
+        const data = await response.json()
+        dispatch(postAnswer(data.answer))
         return answer
     }
 }
@@ -61,13 +61,21 @@ export const answerEditor = (answer) => async(dispatch) => {
         return editedAnswer;
     }
 }
-export const answerDeleter = answerId => async(dispatch) => {
-    const res = await csrfFetch(`/api/answers/${answerId}`, {method: 'DELETE'})
+export const answerDeleter = (answerId) => async(dispatch) => {
+    const res = await csrfFetch(`/api/answers/`,{
+        method: 'DELETE',
+        body: JSON.stringify(answerId)
+    })
     if (res.ok) {
-        const answer = await res.json()
-        dispatch(deleteAnswer(answer))
-        return answer.id
+        dispatch(deleteAnswer(answerId))
+        return answerId
     }
+}
+
+const sortEntries = (entries) => {
+    return entries.sort((answerA, answerB) => {
+        return answerB.id - answerA.id
+    })
 }
 const initialState = {entries: []}
 
@@ -75,30 +83,36 @@ const answersReducer = (state = initialState, action) => {
     let newState = {};
     switch (action.type) {
         case GET_ANSWERS:
-            newState = {...state, entries: [...action.answers]}
-            newState.entries[action.answers.id] = action.answers.id
-            newState.entries.sort((AnswerA, AnswerB) => AnswerB.id - AnswerA.id)
+            let answers = {}
+            action.answers.forEach(answer => {
+                answers[answer.id] = answer
+            })
+            newState = {...answers, ...state, entries: sortEntries(action.answers)}
             return newState;
 
         case POST_ANSWER:
-            let id = action.answer.id
-            if (!state.entries[id]) {
+            if (!state[action.answer.id]) {
                 newState = {
                     ...state,
-                    entries: [...state.entries]
+                    [action.answer.id]: action.answer
                 }
-                newState.entries[id] = action.answer
-            }else{
-                newState = {...state,
-                    entries: [...state.entries,
-                            state.entries[id] = action.answer
-                    ]
+                const answerList = newState.entries.map(id => newState[id])
+                answerList.push(action.answer)
+                newState.entries = sortEntries(answerList)
+                return newState
+            } else {
+                newState = {
+                    ...state,
+                    [action.answer.id]: {
+                        ...state[action.answer.id],
+                        ...action.answer
+                    }
                 }
+                return newState;
             }
-            return newState;
         case DELETE_ANSWER:
             newState = {...state,
-                        entries: state.entries.filter((id) => id !== action.answerId)}
+                        entries: state.entries.filter(answer => answer.id !== action.answerId)}
             return newState;
 
         default: return state;
