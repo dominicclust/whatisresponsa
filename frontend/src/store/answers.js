@@ -62,32 +62,28 @@ export const answerEditor = (answer) => async(dispatch) => {
     }
 }
 export const answerDeleter = (answerId) => async(dispatch) => {
-    const res = await csrfFetch(`/api/answers/`,{
-        method: 'DELETE',
-        body: JSON.stringify(answerId)
+    const response = await csrfFetch(`/api/answers/${answerId}`,{
+        method: 'DELETE'
     })
-    if (res.ok) {
-        dispatch(deleteAnswer(answerId))
-        return answerId
-    }
+    dispatch(deleteAnswer())
+    return response
 }
+
 
 const sortEntries = (entries) => {
     return entries.sort((answerA, answerB) => {
         return answerB.id - answerA.id
     })
 }
-const initialState = {entries: []}
 
+const initialState = {entries: {}}
 const answersReducer = (state = initialState, action) => {
     let newState = {};
     switch (action.type) {
         case GET_ANSWERS:
-            let answers = {}
-            action.answers.forEach(answer => {
-                answers[answer.id] = answer
-            })
-            newState = {...answers, ...state, entries: sortEntries(action.answers)}
+            newState = {...state};
+            action.answers.sort((answerA, answerB) => answerB.id - answerA.id)
+                .map(answer => newState[answer.id] = answer)
             return newState;
 
         case POST_ANSWER:

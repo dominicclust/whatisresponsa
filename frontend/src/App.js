@@ -21,25 +21,18 @@ function App() {
   }, [dispatch])
 
   useEffect(() => {
-    if (user) dispatch(answerActions.answerFetch())
-  }, [dispatch, user])
-
+    if (user && isLoaded) return dispatch(answerActions.answerFetch())
+  }, [dispatch])
 
   return (
     <>
       <Navigation isLoaded={isLoaded} />
       <Switch>
-        <Route exact path='/'>
+        <Route exact path={['/', '/login', '/signup']}>
           <SplashPage />
         </Route>
-        <Route path='/login'>
-          <LoginFormModal/>
-        </Route>
-        <Route path='/signup'>
-          <SignupFormModal />
-        </Route>
-        <Route path={['/answers', '/answers/:answerId']} exact>
-          <AnswerContainer isLoaded={isLoaded} />
+        <Route path={['/answers', '/answers/:answerId']}>
+          <AnswerContainer />
         </Route>
         <Route path='/answers/new'>
           <AddAnswerModal />
